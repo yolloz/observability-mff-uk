@@ -24,15 +24,13 @@ func loggingMiddleware(next http.Handler) http.Handler {
 }
 
 func requestLog(f string, r *http.Request) *logrus.Entry {
-	// TODO Logging: Obtain requestId, correlationId & traceId to the log entry. Uncomment following 3 lines.
-	// rid := getRequestId(r)
-	// cid := getCorrelationId(r)
-	// tid := getTracingId(r)
+	rid := getRequestId(r)
+	cid := getCorrelationId(r)
+	tid := getTracingId(r)
 	return funcLog(f).WithFields(logrus.Fields{
-		// TODO Logging: Add requestId, correlationId & traceId to the log entry. Uncomment following 3 lines.
-		// "requestId":     rid,
-		// "correlationId": cid,
-		// "traceId":       tid,
+		"requestId":     rid,
+		"correlationId": cid,
+		"traceId":       tid,
 	})
 }
 
